@@ -236,9 +236,9 @@ class NextFrameGAN(BaseGAN):
 
 
  
-        d_loss = sum(d_losses)/len(d_losses)
-        g_loss = sum(g_losses)/len(g_losses)
-        self.d_fake = sum(d_fake)/len(d_fake)
+        d_loss = np.mean(d_losses)
+        g_loss = np.mean(g_losses)
+        self.d_fake = np.mean(d_fake)
         return d_loss, g_loss
 
     def forward_loss(self, loss=None):
