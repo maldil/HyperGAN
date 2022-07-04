@@ -43,7 +43,7 @@ def normalize(v, r, method):
       v_mean = [tf.reduce_mean(tf.abs(_g)) for _g in v]
       norm_factor = [_r / (_h+1e-12) for _r, _h in zip(r_mean, v_mean)]
       v = [_n * _h for _n, _h in zip(norm_factor, v)]
-      norm_factor = sum(norm_factor) / len(norm_factor)
+      norm_factor = np.mean(norm_factor)
 
   if method == 6:
       def median(x):
