@@ -240,7 +240,7 @@ class NextFrameGAN(BaseGAN):
                     grems = grems[1:] + [rg]
                     d_fakes.append(D(torch.cat(grems, dim=1), context={"c":rc}))
 
-        d_fake = sum(d_fakes)/len(d_fakes)
+        d_fake = np.mean(d_fakes)
         return d_real, d_fake
 
     def forward_video_discriminator(self, cs, gcs, rcs):
@@ -295,7 +295,7 @@ class NextFrameGAN(BaseGAN):
         for g in gcs:
             d_fakes.append(C(g))
 
-        d_fake = sum(d_fakes)/len(d_fakes)
+        d_fake = np.mean(d_fakes)
         return d_real, d_fake
 
     def forward_loss(self):
@@ -519,7 +519,7 @@ class NextFrameGAN(BaseGAN):
                 gs.append(g)
 
         if self.config.vae:
-            vae_loss = sum(vae_loss)/len(vae_loss)
+            vae_loss = np.mean(vae_loss)
         return cs, zs, gs, gcs, gzs, rgs, rcs, vae_loss
 
     def channels(self):
