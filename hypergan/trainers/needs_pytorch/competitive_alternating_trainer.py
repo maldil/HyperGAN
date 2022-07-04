@@ -91,7 +91,7 @@ def tf_conjugate_gradient(operator,
           if(config.normalize == 4):
               rhs_mean = [tf.reduce_mean(tf.abs(_g)) for _g in rhs]
               h_2_v_mean = [tf.reduce_mean(tf.abs(_g)) for _g in h_2_v]
-              rhs_mean = sum(rhs_mean)  / len(rhs_mean)
+              rhs_mean = np.mean(rhs_mean)
               h_2_v_mean = sum(h_2_v_mean)  / len(h_2_v_mean)
               norm_factor = rhs_mean / h_2_v_mean
               h_2_v = [norm_factor * _h for _h in h_2_v]
