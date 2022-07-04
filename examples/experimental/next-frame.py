@@ -273,7 +273,7 @@ class NextFrameGAN(BaseGAN):
                     d_fakes.append(VD(torch.cat((*randcs, c), dim=1)))
                 randcs = randcs[1:] + [c]
 
-        d_fake = sum(d_fakes)/len(d_fakes)
+        d_fake = np.mean(d_fakes)
         return d_real, d_fake
 
     def forward_image_discriminator(self, x, gs):
@@ -284,7 +284,7 @@ class NextFrameGAN(BaseGAN):
         for g in gs:
             d_fakes.append(ID(g))
 
-        d_fake = sum(d_fakes)/len(d_fakes)
+        d_fake = np.mean(d_fakes)
         return d_real, d_fake
 
     def forward_c_discriminator(self, c, gcs):
